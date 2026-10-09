@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "spam-detector"
+version = "1.0.0"
+description = "Naive Bayes-based SMS spam detector"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [{name = "Developer"}]
+requires-python = ">=3.8"
+dependencies = [
+    "scikit-learn>=1.0.0",
+    "pandas>=1.3.0",
+    "numpy>=1.21.0",
+    "joblib>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.2.0",
+    "pytest-cov>=2.11.0",
+    "black>=21.5b2",
+]
+
+[project.scripts]
+spam-detector = "spam_detector.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["spam_detector*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+
+[tool.coverage.run]
+source = ["spam_detector"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if __name__ == .__main__.:",
+]
